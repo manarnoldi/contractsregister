@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="SharePoint Add-in Feature" Id="85013546-2bd7-4a0d-92e5-f62cbfaede9e" Scope="Web" Title="Contracts Register FeatureMain" Version="2.1.4.0">
+  <ElementManifests>
+    <ElementManifest Location="Pages\Elements.xml" />
+    <ElementManifest Location="Scripts\Elements.xml" />
+    <ElementFile Location="Scripts\App.js" />
+    <ElementFile Location="Scripts\jquery-3.4.1.slim.min.map" />
+    <ElementFile Location="Scripts\jquery-3.4.1.slim.min.js" />
+    <ElementFile Location="Scripts\jquery-3.4.1.slim.js" />
+    <ElementFile Location="Scripts\jquery-3.4.1.min.map" />
+    <ElementFile Location="Scripts\jquery-3.4.1.min.js" />
+    <ElementFile Location="Scripts\jquery-3.4.1.js" />
+    <ElementFile Location="Scripts\jquery-3.4.1.intellisense.js" />
+    <ElementManifest Location="Content\Elements.xml" />
+    <ElementFile Location="Content\App.css" />
+    <ElementManifest Location="Images\Elements.xml" />
+    <ElementFile Location="Images\AppIcon.png" />
+    <ElementManifest Location="Elements.xml" />
+    <ElementFile Location="src\Default.aspx" />
+    <ElementFile Location="src\common\directives\spinner\loading-spinner.css" />
+    <ElementFile Location="src\common\directives\spinner\loading-spinner.js" />
+    <ElementFile Location="src\css\angular-growl.min.css" />
+    <ElementFile Location="src\css\dataTables.bootstrap.min.css" />
+    <ElementFile Location="src\css\angular-datatables.min.css" />
+    <ElementFile Location="src\css\chat.css" />
+    <ElementFile Location="src\css\App.css" />
+    <ElementFile Location="src\common\people-picker\sp-peoplepicker.min.css" />
+    <ElementFile Location="src\common\people-picker\sp-peoplepicker.min.js" />
+    <ElementFile Location="src\common\angular-datatables.min.js" />
+    <ElementFile Location="src\common\jquery.dataTables.min.js" />
+    <ElementFile Location="src\common\directives\ng-file-model.js" />
+    <ElementFile Location="src\common\directives\pagination\dirPagination.js" />
+    <ElementFile Location="src\common\directives\pagination\dirPagination.tpl.html" />
+    <ElementFile Location="src\common\directives\ui-bootstrap-dialogs.js" />
+    <ElementFile Location="src\common\utilities\sp-ng-module.js" />
+    <ElementFile Location="src\common\utilities\utilities.js" />
+    <ElementFile Location="src\common\services\contracts.js" />
+    <ElementFile Location="src\common\directives\add-btn\add-btn.dir.js" />
+    <ElementFile Location="src\common\directives\add-btn\add-btn.tpl.html" />
+    <ElementFile Location="src\common\directives\admin-menu\admin-menu.dir.js" />
+    <ElementFile Location="src\common\directives\admin-menu\admin-menu.tpl.html" />
+    <ElementFile Location="src\common\directives\back-btn\back-btn.dir.js" />
+    <ElementFile Location="src\common\directives\back-btn\back-btn.tpl.html" />
+    <ElementFile Location="src\common\directives\angular-growl.min.js" />
+    <ElementFile Location="src\common\services\departments.js" />
+    <ElementFile Location="src\common\services\costcenters.js" />
+    <ElementFile Location="src\common\services\documenttypes.js" />
+    <ElementFile Location="src\common\services\settings.js" />
+    <ElementFile Location="src\common\services\contract-suppliers.js" />
+    <ElementFile Location="src\common\services\contract-documents.js" />
+    <ElementFile Location="src\app\App.js" />
+    <ElementFile Location="src\app\adm-costcenters\costcenters-add.tpl.html" />
+    <ElementFile Location="src\app\adm-costcenters\costcenters-list.tpl.html" />
+    <ElementFile Location="src\app\adm-costcenters\costcenters.js" />
+    <ElementFile Location="src\app\adm-departments\departments-add.tpl.html" />
+    <ElementFile Location="src\app\adm-departments\departments-list.tpl.html" />
+    <ElementFile Location="src\app\adm-departments\departments.js" />
+    <ElementFile Location="src\app\adm-doctypes\doctypes-add.tpl.html" />
+    <ElementFile Location="src\app\adm-doctypes\doctypes-list.tpl.html" />
+    <ElementFile Location="src\app\adm-doctypes\doctypes.js" />
+    <ElementFile Location="src\app\adm-securiygroups\securiygroups-add.tpl.html" />
+    <ElementFile Location="src\app\adm-securiygroups\securiygroups-list.tpl.html" />
+    <ElementFile Location="src\app\adm-securiygroups\securiygroups.js" />
+    <ElementFile Location="src\app\contract-dates\contract-dates-add.js" />
+    <ElementFile Location="src\app\contract-dates\contract-dates-add.tpl.html" />
+    <ElementFile Location="src\app\contracts-db\contracts-db.js" />
+    <ElementFile Location="src\app\contracts-db\contracts-db.tpl.html" />
+    <ElementFile Location="src\common\services\currencies.js" />
+    <ElementFile Location="src\app\adm-currencies\currencies-add.tpl.html" />
+    <ElementFile Location="src\app\adm-currencies\currencies-list.tpl.html" />
+    <ElementFile Location="src\app\adm-currencies\currencies.js" />
+    <ElementFile Location="src\app\adm-settings\settings-list.tpl.html" />
+    <ElementFile Location="src\app\adm-settings\settings.js" />
+    <ElementFile Location="src\common\directives\contract-details\contract-details.dir.js" />
+    <ElementFile Location="src\common\directives\contract-details\contract-details.tpl.html" />
+    <ElementFile Location="src\common\directives\add-supplier\add-supplier.dir.js" />
+    <ElementFile Location="src\common\directives\add-supplier\add-supplier.tpl.html" />
+    <ElementFile Location="src\common\directives\add-document\add-document.dir.js" />
+    <ElementFile Location="src\common\directives\add-document\add-document.tpl.html" />
+    <ElementFile Location="src\common\services\contract-renewals.js" />
+    <ElementFile Location="src\css\jquery.dataTables.min.css" />
+    <ElementFile Location="src\images\sort_asc.png" />
+    <ElementFile Location="src\images\sort_both.png" />
+    <ElementFile Location="src\images\sort_desc.png" />
+    <ElementFile Location="src\common\services\links.js" />
+    <ElementFile Location="src\app\adm-links\links-add.tpl.html" />
+    <ElementFile Location="src\app\adm-links\links-list.tpl.html" />
+    <ElementFile Location="src\app\adm-links\links.js" />
+    <ElementFile Location="src\common\directives\links\links.js" />
+    <ElementFile Location="src\common\directives\links\links.dir.html" />
+  </ElementManifests>
+  <UpgradeActions>
+    <VersionRange>
+      <ApplyElementManifests>
+        <ElementManifest Location="Pages\Elements.xml" />
+        <ElementManifest Location="Scripts\Elements.xml" />
+        <ElementManifest Location="Content\Elements.xml" />
+        <ElementManifest Location="Images\Elements.xml" />
+        <ElementManifest Location="Elements.xml" />
+      </ApplyElementManifests>
+    </VersionRange>
+  </UpgradeActions>
+</Feature>

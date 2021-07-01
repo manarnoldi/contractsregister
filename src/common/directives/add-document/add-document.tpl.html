@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Document Type: <span class="asteriskField">*</span></label>
+            <select ng-model="ctrl.doctype"
+                    ng-options="x.title for x in ctrl.documenttypes track by x.id"
+                    class="select form-control">
+                <option value="" class="" selected="selected">-- Select Document Type --</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label class="control-label">Document Description: <span class="asteriskField">*</span></label>
+            <input class="form-control"
+                   type="text"
+                   ng-model="ctrl.docdetails">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label">Attachment <span class="asteriskField">*</span></label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+                <input type="file" placeholder="Attachment" class="form-control input-md file" ng-file-model="ctrl.docattachment">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label class="control-label">Action:</label>
+        <a href="" class="btn btn-success form-control" ng-click="ctrl.addDocument()">
+            <i class="fa fa-plus-circle"></i> Add Attachment
+        </a>
+    </div>
+</div>

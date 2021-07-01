@@ -1,0 +1,183 @@
+﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C561F04C-B26A-4430-9DCC-00EFF41D0680}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Contracts_Register</RootNamespace>
+    <AssemblyName>Contracts Register</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetOfficeVersion>16.1</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>12.2</MinimumOfficeToolsVersion>
+    <IncludeAssemblyInPackage>False</IncludeAssemblyInPackage>
+    <ProjectMode>SharePointApp</ProjectMode>
+    <AppFeaturePartId>{725b96ac-5fee-45f5-ad2d-9c983a9b9d30}</AppFeaturePartId>
+    <WspPartId>{8db555e9-396b-4736-bb36-94a707bcfb8d}</WspPartId>
+    <WorkflowPartId>{faca8007-0872-46e7-8b2c-7bb7a5ef9aeb}</WorkflowPartId>
+    <CspkgPartId>{d2aaef63-941f-4ae1-8fc4-2ba89dadc807}</CspkgPartId>
+    <SqlPackagePartId>{b2bcef18-0ff7-4c4e-98b1-1ced9868b4f1}</SqlPackagePartId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Elements.xml" />
+    <Content Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="src\app\adm-links\links-add.tpl.html" />
+    <Content Include="src\app\adm-links\links-list.tpl.html" />
+    <Content Include="src\app\adm-links\links.js" />
+    <Content Include="src\app\adm-costcenters\costcenters-add.tpl.html" />
+    <Content Include="src\app\adm-costcenters\costcenters-list.tpl.html" />
+    <Content Include="src\app\adm-costcenters\costcenters.js" />
+    <Content Include="src\app\adm-departments\departments-add.tpl.html" />
+    <Content Include="src\app\adm-departments\departments-list.tpl.html" />
+    <Content Include="src\app\adm-departments\departments.js" />
+    <Content Include="src\app\adm-currencies\currencies-add.tpl.html" />
+    <Content Include="src\app\adm-currencies\currencies-list.tpl.html" />
+    <Content Include="src\app\adm-currencies\currencies.js" />
+    <Content Include="src\app\adm-doctypes\doctypes-add.tpl.html" />
+    <Content Include="src\app\adm-doctypes\doctypes-list.tpl.html" />
+    <Content Include="src\app\adm-doctypes\doctypes.js" />
+    <Content Include="src\app\adm-securiygroups\securiygroups-add.tpl.html" />
+    <Content Include="src\app\adm-securiygroups\securiygroups-list.tpl.html" />
+    <Content Include="src\app\adm-securiygroups\securiygroups.js" />
+    <Content Include="src\app\adm-settings\settings-list.tpl.html" />
+    <Content Include="src\app\adm-settings\settings.js" />
+    <Content Include="src\app\App.js" />
+    <Content Include="src\app\contract-dates\contract-dates-add.js" />
+    <Content Include="src\app\contract-dates\contract-dates-add.tpl.html" />
+    <Content Include="src\app\contracts-db\contracts-db.js" />
+    <Content Include="src\app\contracts-db\contracts-db.tpl.html" />
+    <Content Include="src\common\angular-datatables.min.js" />
+    <Content Include="src\common\directives\add-btn\add-btn.dir.js" />
+    <Content Include="src\common\directives\add-btn\add-btn.tpl.html" />
+    <Content Include="src\common\directives\add-document\add-document.dir.js" />
+    <Content Include="src\common\directives\add-document\add-document.tpl.html" />
+    <Content Include="src\common\directives\admin-menu\admin-menu.dir.js" />
+    <Content Include="src\common\directives\admin-menu\admin-menu.tpl.html" />
+    <Content Include="src\common\directives\angular-growl.min.js" />
+    <Content Include="src\common\directives\back-btn\back-btn.dir.js" />
+    <Content Include="src\common\directives\back-btn\back-btn.tpl.html" />
+    <Content Include="src\common\directives\add-supplier\add-supplier.dir.js" />
+    <Content Include="src\common\directives\add-supplier\add-supplier.tpl.html" />
+    <Content Include="src\common\directives\contract-details\contract-details.dir.js" />
+    <Content Include="src\common\directives\contract-details\contract-details.tpl.html" />
+    <Content Include="src\common\directives\links\links.dir.html" />
+    <Content Include="src\common\directives\links\links.js" />
+    <Content Include="src\common\directives\ng-file-model.js" />
+    <Content Include="src\common\directives\pagination\dirPagination.js" />
+    <Content Include="src\common\directives\pagination\dirPagination.tpl.html" />
+    <Content Include="src\common\directives\spinner\loading-spinner.css" />
+    <Content Include="src\common\directives\spinner\loading-spinner.js" />
+    <Content Include="src\common\directives\ui-bootstrap-dialogs.js" />
+    <Content Include="src\common\jquery.dataTables.min.js" />
+    <Content Include="src\common\people-picker\sp-peoplepicker.min.css" />
+    <Content Include="src\common\people-picker\sp-peoplepicker.min.js" />
+    <Content Include="src\common\services\contract-renewals.js" />
+    <Content Include="src\common\services\contract-documents.js" />
+    <Content Include="src\common\services\contract-suppliers.js" />
+    <Content Include="src\common\services\contracts.js" />
+    <Content Include="src\common\services\currencies.js" />
+    <Content Include="src\common\services\departments.js" />
+    <Content Include="src\common\services\costcenters.js" />
+    <Content Include="src\common\services\documenttypes.js" />
+    <Content Include="src\common\services\settings.js" />
+    <Content Include="src\common\services\links.js" />
+    <Content Include="src\common\utilities\sp-ng-module.js" />
+    <Content Include="src\common\utilities\utilities.js" />
+    <Content Include="src\css\angular-datatables.min.css" />
+    <Content Include="src\css\angular-growl.min.css" />
+    <Content Include="src\css\App.css" />
+    <Content Include="src\css\chat.css" />
+    <Content Include="src\css\dataTables.bootstrap.min.css" />
+    <Content Include="src\css\jquery.dataTables.min.css" />
+    <Content Include="src\Default.aspx" />
+    <Content Include="src\images\sort_asc.png" />
+    <Content Include="src\images\sort_both.png" />
+    <Content Include="src\images\sort_desc.png" />
+    <None Include="packages.config" />
+    <None Include="Pages\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{866b1475-dbb9-43e2-b0df-0089c1612bc7}</SharePointProjectItemId>
+    </None>
+    <Content Include="Pages\Elements.xml" />
+    <None Include="SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9775aa4e-ac73-402d-adbc-4d940307bc2a}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\jquery-3.4.1.min.map" />
+    <None Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <None Include="Scripts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b2bcef18-0ff7-4c4e-98b1-1ced9868b4f1}</SharePointProjectItemId>
+    </None>
+    <Content Include="Scripts\Elements.xml" />
+    <Content Include="Scripts\App.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4a9b275d-a0b3-44dd-94e6-c14f314fd014}</SharePointProjectItemId>
+    </None>
+    <Content Include="Content\Elements.xml" />
+    <Content Include="Content\App.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\AppIcon.png">
+      <OpcRelationship>manifest-icon</OpcRelationship>
+    </Content>
+    <Content Include="Images\Elements.xml" />
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{757c8f2d-01ab-4f31-976b-3a6a75b23df0}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package\Package.package">
+      <PackageId>{b35bbf0e-7c6f-4a87-9185-d0dbb1603ff0}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Features\FeatureMain\FeatureMain.feature">
+      <FeatureId>{85013546-2bd7-4a0d-92e5-f62cbfaede9e}</FeatureId>
+    </None>
+    <None Include="Features\FeatureMain\FeatureMain.Template.xml">
+      <DependentUpon>FeatureMain.feature</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AppManifestFile Include="AppManifest.xml">
+      <SubType>Designer</SubType>
+    </AppManifestFile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

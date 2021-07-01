@@ -1,0 +1,63 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <back-btn title="Back to DashBoard" link="dashboard"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.links"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <add-btn link="addAdminDocTypes" title="Add Document Type"></add-btn>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-condensed table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Document Type Name:</th>
+                                    <th>Required:</th>
+                                    <th>Step:</th>
+                                    <th>Agreement Type:</th>
+                                    <th>Order By:</th>
+                                    <th style="min-width: 150px"></th>
+                                </tr>
+
+                                <tr dir-paginate="doctype in ctrl.doctypes | itemsPerPage: 10">
+                                    <td><span>{{doctype.title}}</span></td>
+                                    <td><span>{{doctype.required ? "Yes": "No"}}</span></td>
+                                    <td>
+                                        <span ng-repeat="st in doctype.step">
+                                            {{st}}<font ng-show="!$last">,</font>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span ng-repeat="at in doctype.agreementtype">
+                                            {{at}}<font ng-show="!$last">,</font>
+                                        </span>
+                                    </td>
+                                    <td><span>{{doctype.orderby}}</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-xs btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Action
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="#editAdminDocType/{{doctype.id}}">Edit</a>
+                                                    <a href="#listAdminDocTypes" ng-click="ctrl.DeleteRecord(doctype.id)">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12">
+                        <dir-pagination-controls boundary-links="true" template-url="common/directives/pagination/dirPagination.tpl.html">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

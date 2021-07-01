@@ -1,0 +1,67 @@
+﻿<form name="frmsupplier">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Supplier Name: <span class="asteriskField">*</span></label>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="ctrl.suppliername">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Supplier Contact Name: <span class="asteriskField">*</span></label>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="ctrl.suppliercontact">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Supplier Physical Address: <span class="asteriskField">*</span></label>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="ctrl.supplieraddress">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Supplier Email & Phone: <span class="asteriskField">*</span></label>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="ctrl.supplieremailphone">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Supplier Website:</label>
+                        <input class="form-control"
+                               type="url"
+                               ng-model="ctrl.website"
+                               name="website">
+                        <span class="asteriskField" ng-show="frmsupplier.website.$error.url">Not valid url!, Websites must be in the format https:// or http://</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Salesforce Organisation ID / Person ID: <span class="asteriskField">*</span></label>
+                        <span>
+                            (This is available on Salesforce and is in the following format: “ORG­­­­xxxxxxx”. Where the supplier is an individual consultant, the format may be “PERxxxxxxx”)
+                        </span>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="ctrl.salesforceid">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">Action:</label>
+                    <a href="" class="btn btn-success form-control" ng-click="ctrl.addSupplier()">
+                        <i class="fa fa-plus-circle"></i> Add Supplier
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

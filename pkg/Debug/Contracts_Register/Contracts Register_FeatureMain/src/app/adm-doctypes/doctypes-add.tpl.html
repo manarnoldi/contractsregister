@@ -1,0 +1,77 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <back-btn title="Back to DocTypes List" link="listAdminDocTypes"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.links"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <div class="panel panel-info">
+                    <div ng-if="ctrl.action == 'add'" class="panel-heading pnl-heading">ADD DOCUMENT TYPE INFORMATION</div>
+                    <div ng-if="ctrl.action == 'edit'" class="panel-heading pnl-heading">EDIT DOCUMENT TYPE INFORMATION</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Document Type Name:</label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.doctype.title"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Required:</label>
+                                    <div class="btn-group">
+                                        <label ng-if="ctrl.doctype.required" class="btn btn-success" ng-model="ctrl.doctype.required" uib-btn-checkbox ng-click="ctrl.changeRequiredValue()">Yes</label>
+                                        <label ng-if="!ctrl.doctype.required" class="btn btn-danger" ng-model="ctrl.doctype.required" uib-btn-checkbox ng-click="ctrl.changeRequiredValue()">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Step:</label>
+                                    <div class="btn-group">
+                                        <label class="btn btn-primary" ng-model="ctrl.step.new" uib-btn-checkbox>New</label>
+                                        <label class="btn btn-primary" ng-model="ctrl.step.extension" uib-btn-checkbox>Extension</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Agreement Type:</label>
+                                    <div class="btn-group">
+                                        <label class="btn btn-success" ng-model="ctrl.agreementtype.contract" uib-btn-checkbox>Contract</label>
+                                        <label class="btn btn-success" ng-model="ctrl.agreementtype.frameworkagreement" uib-btn-checkbox>Framework Agreement</label>
+                                        <label class="btn btn-success" ng-model="ctrl.agreementtype.propertylease" uib-btn-checkbox>Property Lease</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Order By:</label>
+                                    <input class="form-control"
+                                           type="number"
+                                           ng-model="ctrl.doctype.orderby"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer clearfix">
+                        <div class="form-group pull-right">
+                            <a href="" class="btn btn-success" ng-click="ctrl.AddRecord()">
+                                <i class="fa fa-save"></i> {{  ctrl.action == 'edit' ? 'Update': 'Add' }} Record
+                            </a>
+                            <a href="#listAdminDocTypes" class="btn btn-warning ">
+                                <i class="fa fa-cut"></i> Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

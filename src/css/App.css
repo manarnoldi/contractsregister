@@ -1,0 +1,177 @@
+﻿/* Place custom styles below */
+.pnl-heading {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#s4-titlerow {
+    display: none !important;
+}
+
+.page-font {
+    font-size: 25px;
+    color: #AD0075;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 8px;
+}
+
+.page-title {
+    font-size: 17px;
+    font-weight: 600;
+    background-color: #fcf8e3;
+    padding: 5px;
+    margin-bottom: 8px;
+    color: #8a6d3b;
+    border-radius: 3px;
+}
+
+.dropdown-menu {
+    min-width: 113px !important;
+}
+
+.dirres {
+    padding: 5px 0px;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.btn-success.active, .btn-success:active, .open > .dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #224e22 !important;
+    border-color: #398439;
+}
+
+.pagination {
+    margin: 0 !important;
+}
+
+.gi-1X {
+    font-size: 1em;
+}
+
+.gi-2X {
+    font-size: 2em;
+}
+
+.gi-3X {
+    font-size: 3em;
+}
+
+.gi-4X {
+    font-size: 4em;
+}
+
+.gi-5X {
+    font-size: 5em;
+}
+
+.huge {
+    font-size: 30px;
+}
+
+.table-quarter {
+    border: 1px solid #33CCFF;
+    padding: 10px;
+    margin-left: -5px;
+    border-radius: 5px;
+}
+
+.admin-title {
+    min-height: 480px;
+    border: 1px solid #faebcc;
+    padding: 5px 10px 10px 10px;
+    margin-top: -5px;
+    border-radius: 5px;
+}
+
+.admin-body {
+    border: 1px solid #faebcc;
+    padding: 10px;
+    margin-top: -5px;
+    margin-left: -15px;
+    border-radius: 5px;
+}
+
+.admin-button {
+    margin: 5px 15px 0px 15px;
+}
+
+.admin-add-btn {
+    margin-bottom: 10px;
+}
+
+.button-active {
+    background-color: #227b95 !important;
+}
+
+.dbSummary {
+    cursor: pointer;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.settings .active, .inactive {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.settings .active, .inactive {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.settings i.active {
+    color: #5cb85c
+}
+
+.settings i.inactive {
+    color: #d9534f
+}
+
+.table .form-control {
+    padding: 1px !important;
+    border-radius: 2px !important;
+    height: 25px !important;
+    font-size: 13px !important;
+}
+
+.asteriskField {
+    color: red;
+}
+
+.contract-table {
+    border: 1px solid #AD0075;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* 5 same size columns */
+@media (min-width: 768px) {
+    .ten-columns > .col-sm-2 {
+        width: 20%;
+    }
+}
+
+hr {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    border: 0 !important;
+    border-top: 1px solid #eee !important;
+}

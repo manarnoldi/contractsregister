@@ -1,0 +1,7 @@
+﻿<div class="admin-title">
+    <div class="row" ng-repeat="link in dirctrl.menuItems">
+        <div class="admin-button">
+            <a ng-href="{{link.url}}" ng-attr-target="{{link.target}}" class="btn btn-info form-control {{link.class}}"><i class="fa {{link.icon}}"></i> {{link.title}}</a>
+        </div>
+    </div>
+</div>

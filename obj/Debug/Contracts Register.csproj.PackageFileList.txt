@@ -1,0 +1,1 @@
+bin\Debug\Contracts_Register.wsp

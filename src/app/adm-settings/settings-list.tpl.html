@@ -1,0 +1,44 @@
+﻿<div class="bootstrap-iso ng-scope settings">
+    <back-btn title="Back to Dashboard" link="Dashboard"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.links"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-condensed table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Setting Code</th>
+                                    <th>Setting Name</th>
+                                    <th>Setting Value</th>
+                                </tr>
+                                <tr dir-paginate="setting in ctrl.settings | orderBy: 'code' | itemsPerPage: 10">
+                                    <td><span>{{setting.code}}</span></td>
+                                    <td><span>{{setting.title}}</span></td>
+                                    <td>
+                                        <i class="fa fa-toggle-on active" ng-if="setting.value == 'Yes'" ng-click="ctrl.changeStatus(setting)"></i>
+                                        <i class="fa fa-toggle-on fa-rotate-180 inactive" ng-if="setting.value == 'No'" ng-click="ctrl.changeStatus(setting);"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12">
+                        <dir-pagination-controls boundary-links="true" template-url="common/directives/pagination/dirPagination.tpl.html">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="" class="btn btn-success pull-right" ng-click="ctrl.updateSettings()">
+                            <i class="fa fa-save"></i> Update Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,469 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-left">
+                    <a href="#dashboard/{{ctrl.teamid}}/{{ctrl.status}}" class="btn btn-sm btn-success">
+                        <i class="fa fa-angle-double-left"></i>
+                        Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading pnl-heading">CONTRACT DETAILS</div>
+        <div class="panel-body">
+            <div class="alert alert-warning" role="alert"><strong>Warning! </strong> Please note, in order to save your contract register entry you will need to upload a contract document in the CONTRACT DOCUMENT section below</div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Title: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.contract.title"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Status: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.status"
+                                            ng-options="x for x in ctrl.statuses"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">-- Select Status --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Country Office/Global Team: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.department"
+                                            ng-options="x.title for x in ctrl.departments track by x.id"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">--Select Country Office/Global Team--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Value: <span class="asteriskField">*</span></label>
+                                    <span>(The total value over the lifetime of the contract, excl. possible extensions)</span>
+                                    <input class="form-control"
+                                           type="number"
+                                           ng-model="ctrl.contract.value"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Currency: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.currency"
+                                            ng-options="x.title for x in ctrl.currencies track by x.id"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">-- Select Currency --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Cost Center Code: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.costcenter"
+                                            ng-options="x.code for x in ctrl.costcenters track by x.id"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">-- Select Cost Center Code --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Cost Center Name: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.costcenter"
+                                            ng-options="x.title for x in ctrl.costcenters track by x.id"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">-- Select Cost Center Name --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Agreement Type: <span class="asteriskField">*</span></label>
+                                    <select ng-model="ctrl.contract.type"
+                                            ng-options="x for x in ctrl.types"
+                                            ng-disabled="ctrl.action == 'details'"
+                                            class="select form-control">
+                                        <option value="" class="" selected="selected">-- Select Status --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Start Date: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="date"
+                                           ng-model="ctrl.contract.startdate"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">End Date: <span class="asteriskField">*</span></label>
+                                    <span>(excl. possible extensions)</span>
+                                    <input class="form-control"
+                                           type="date"
+                                           ng-model="ctrl.contract.enddate"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Managers: <span class="asteriskField">*</span></label>
+                                    <div ng-if="ctrl.action != 'details'">
+                                        <sp-people-picker name="contractmanagers"
+                                                          ng-model="ctrl.contract.managers"
+                                                          max-entries="5"
+                                                          allow-duplicates="false"
+                                                          show-login="false"
+                                                          show-title="true"
+                                                          min-characters="3"
+                                                          min-entries="1"
+                                                          app-web-url="ctrl.hostWebUrl" />
+                                    </div>
+                                    <div ng-if="ctrl.action != 'add'">
+                                        <div ng-repeat="manager in ctrl.contract.managersview" class="badge">
+                                            <span>{{ manager.title }}</span>
+                                            <div class="btn btn-xs btn-danger" ng-click="ctrl.removeContractManager(manager.id)" ng-if="ctrl.action != 'details'">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-4" ng-if="ctrl.action != 'details'">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Managers: <span class="asteriskField">*</span></label>
+                                    <sp-people-picker name="contractmanagers"
+                                                      ng-model="ctrl.contract.managers"
+                                                      max-entries="5"
+                                                      allow-duplicates="false"
+                                                      show-login="false"
+                                                      show-title="true"
+                                                      min-characters="3"
+                                                      min-entries="1"
+                                                      app-web-url="ctrl.hostWebUrl" />
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Option to extend (months): </label>
+                                    <span>(Total number of months which the contract can potentially be extended for)</span>
+                                    <input class="form-control"
+                                           type="number"
+                                           ng-model="ctrl.contract.extentionmonths"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Breakdown of extension period:</label>
+                                    <span>(How total extension period is broken down, if applicable e.g. 24mths: 1 yr+1yr)</span>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.contract.extentionspossible"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Total value of possible extensions:</label>
+                                    <span>(Total value of all possible contract extension periods (exclu original contract value))</span>
+                                    <input class="form-control"
+                                           type="number"
+                                           ng-model="ctrl.contract.extentionvalue"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Comments:</label>
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              ng-model="ctrl.contract.comments"
+                                              ng-readonly="ctrl.action == 'details'"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Contract Termination Notice Period (Days): <span class="asteriskField">*</span></label>
+                                    <span>
+                                        (This the minimum number of days before the contract ends when written notice to suppliers must be given by in order to end the contract)
+                                    </span>
+                                    <input class="form-control"
+                                           type="number"
+                                           ng-model="ctrl.contract.noticeperiod"
+                                           ng-readonly="ctrl.action == 'details'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Link to Procurement Documents:</label>
+                                    <span>
+                                        (link to the procurement file on the relevant Country Office/ Global Team SharePoint team site)
+                                    </span>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.contract.procdocslink"
+                                           ng-if="ctrl.action != 'details'">
+                                    <span ng-if="ctrl.action == 'details'">
+                                        <a class="form-control" target="_blank" ng-href="{{ctrl.contract.procdocslink}}">{{ctrl.contract.procdocslink}}</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="ctrl.action == 'renew'">
+                            <div class="col-md-9">
+
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Action:</label>
+                                <a href="" class="btn btn-success form-control" ng-click="ctrl.updateContract()">
+                                    <i class="fa fa-plus-circle"></i> Update Contract Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning" ng-if="ctrl.action != 'add'">
+                <div class="panel-heading pnl-heading">Contract extensions</div>
+                <div ng-if="ctrl.action != 'add'" class="alert alert-warning" role="alert"><strong>Warning! </strong>Contract extensions are only permitted where the original procurement process included options to extend the contract period. In order to save your contract extension you will need to upload an extension letter and select the Extension Letter document type in the CONTRACT DOCUMENT section below.</div>
+                <div class="panel-body">
+                    <div class="well" ng-if="ctrl.action == 'renew'">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Extension Start Date:</label>
+                                            <input class="form-control"
+                                                   type="date"
+                                                   ng-model="ctrl.renewal.startdate">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Extension End Date:</label>
+                                            <input class="form-control"
+                                                   type="date"
+                                                   ng-model="ctrl.renewal.enddate">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Extension Value:</label>
+                                            <input class="form-control"
+                                                   type="number"
+                                                   ng-model="ctrl.renewal.value">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Extension Currency:</label>
+                                            <select ng-model="ctrl.renewal.currency"
+                                                    ng-options="x.title for x in ctrl.currencies track by x.id"
+                                                    class="select form-control">
+                                                <option value="" class="" selected="selected">-- Select Currency --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Action:</label>
+                                        <a href="" class="btn btn-success form-control" ng-click="ctrl.addRenewal()">
+                                            <i class="fa fa-plus-circle"></i> Add Contract Extension
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contract-table">
+                                <table class="table table-bordered table-condensed table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="min-width:200px;">Extension Start Date</th>
+                                            <th style="min-width:200px;">Extension End Date</th>
+                                            <th style="min-width:120px;">Extension Value</th>
+                                            <th style="min-width:120px;">Extension Currency</th>
+                                            <th style="min-width:100px;">Extension By</th>
+                                            <th style="min-width:100px;">Extension Date</th>
+                                            <th style="min-width:100px;">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="ren in ctrl.contract.renewals">
+                                            <td><span>{{ren.startdate | date: 'dd/MM/yyyy' : 'europe/london'}}</span></td>
+                                            <td><span>{{ren.enddate | date: 'dd/MM/yyyy' : 'europe/london'}}</span></td>
+                                            <td><span>{{ren.value}}</span></td>
+                                            <td><span>{{ren.currency.title}}</span></td>
+                                            <td><span>{{ren.uploadby.title}}</span></td>
+                                            <td><span>{{ren.uploaddate | date: 'dd/MM/yyyy HH:mm:ss' : 'europe/london'}}</span></td>
+                                            <td ng-if="ctrl.action == 'renew'"><a href="" class="btn btn-xs btn-danger" ng-click="ctrl.RemoveRenewal(ren)">Delete</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading pnl-heading">Contract suppliers</div>
+                <div class="panel-body">
+                    <div class="well well-sm" ng-if="ctrl.action == 'add'">
+                        <add-supplier></add-supplier>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contract-table">
+                                <table class="table table-bordered table-condensed table-striped table-hover">
+                                    <thead>
+                                        <tr ng-if="ctrl.action == 'add'">
+                                            <th style="min-width:200px;">Supplier Name</th>
+                                            <th style="min-width:200px;">Supplier Contact Name</th>
+                                            <th style="min-width:200px;">Supplier Physical Address</th>
+                                            <th style="min-width:200px;">Supplier Email & Phone</th>
+                                            <th style="min-width:200px;">Supplier Website</th>
+                                            <th style="min-width:200px;">Salesforce Id</th>
+                                            <th style="width:110px">Action</th>
+                                        </tr>
+                                        <tr ng-if="ctrl.action != 'add'">
+                                            <th style="min-width:200px;">Supplier Name</th>
+                                            <th style="min-width:200px;">Supplier Contact Name</th>
+                                            <th style="min-width:200px;">Supplier Physical Address</th>
+                                            <th style="min-width:200px;">Supplier Email & Phone</th>
+                                            <th style="min-width:200px;">Supplier Website</th>
+                                            <th style="min-width:200px;">Salesforce Id</th>
+                                            <th style="min-width:120px;">Upload By</th>
+                                            <th style="min-width:120px;">Upload Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="supplier in ctrl.contract.suppliers" ng-if="ctrl.action == 'add'">
+                                            <td><span>{{supplier.title}}</span></td>
+                                            <td><span>{{supplier.contacts}}</span></td>
+                                            <td><span>{{supplier.address}}</span></td>
+                                            <td><span>{{supplier.emailphone}}</span></td>
+                                            <td><span>{{supplier.website}}</span></td>
+                                            <td><span>{{supplier.salesforceid}}</span></td>
+                                            <td><a href="" class="btn btn-xs btn-danger" ng-click="ctrl.RemoveSupplier(supplier)" ng-if="ctrl.action != 'details'">Remove</a></td>
+                                        </tr>
+
+                                        <tr ng-repeat="supplier in ctrl.contract.suppliers" ng-if="ctrl.action != 'add'">
+                                            <td><span>{{supplier.title}}</span></td>
+                                            <td><span>{{supplier.contacts}}</span></td>
+                                            <td><span>{{supplier.address}}</span></td>
+                                            <td><span>{{supplier.emailphone}}</span></td>
+                                            <td><span><a target="_blank" ng-href="{{supplier.website}}">{{supplier.website}}</a></span></td>
+                                            <td><span>{{supplier.salesforceid}}</span></td>
+                                            <td><span>{{supplier.uploadby.title}}</span></td>
+                                            <td><span>{{supplier.uploaddate | date: 'dd/MM/yyyy HH:mm:ss' : 'europe/london'}}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading pnl-heading">Contract documents</div>
+                <div ng-if="ctrl.action != 'add'" class="alert alert-warning" role="alert"><strong>Warning! </strong>Attached documents should only be deleted if they have been uploaded in error. Do not remove expired contract documents.</div>
+                <div class="panel-body">
+                    <div class="well well-sm" ng-if="ctrl.action != 'details'">
+                        <add-document></add-document>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contract-table">
+                                <table class="table table-bordered table-condensed table-striped table-hover">
+                                    <thead>
+                                        <tr ng-if="ctrl.action == 'add'">
+                                            <th style="min-width:150px;">Document Title</th>
+                                            <th style="min-width:150px;">Document Type</th>
+                                            <th style="min-width:200px;">Document Description</th>
+                                            <th style="width:110px">Action</th>
+                                        </tr>
+                                        <tr ng-if="ctrl.action != 'add'">
+                                            <th style="min-width:150px;">Document Title</th>
+                                            <th style="min-width:150px;">Document Type</th>
+                                            <th style="min-width:200px;">Document Description</th>
+                                            <th style="min-width:120px;">Upload By</th>
+                                            <th style="min-width:120px;">Upload Date</th>
+                                            <th style="width:110px">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="doc in ctrl.contract.documents" ng-if="ctrl.action == 'add'">
+                                            <td><span>{{doc.attachment.name}}</span></td>
+                                            <td><span>{{doc.type.title}}</span></td>
+                                            <td><span>{{doc.details}}</span></td>
+                                            <td><a href="" class="btn btn-xs btn-danger" ng-if="ctrl.action != 'details'" ng-click="ctrl.RemoveDocument(doc)">Remove</a></td>
+                                        </tr>
+                                        <tr ng-repeat="doc in ctrl.contract.documents | orderBy: '-uploaddate'" ng-if="ctrl.action != 'add'">
+                                            <td><a href="{{doc.link.href}}?&web=1" target="_blank">{{doc.link.title}}</a></td>
+                                            <td><span>{{doc.type.title}}</span></td>
+                                            <td><span>{{doc.details}}</span></td>
+                                            <td><span>{{doc.uploadby.title}}</span></td>
+                                            <td><span>{{doc.uploaddate | date: 'dd/MM/yyyy HH:mm:ss' : 'europe/london'}}</span></td>
+                                            <td><a href="" class="btn btn-xs btn-danger" ng-if="ctrl.contract.curusermanager && ctrl.action == 'renew'" ng-click="ctrl.RemoveDocument(doc)">Delete</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row" ng-if="ctrl.action == 'add'">
+                <div class="col-md-12">
+                    <div class="form-group pull-right">
+                        <!-- <button class="btn btn-success" ng-click="ctrl.addContract()" ng-disabled="ctrl.submitClicked">Save and close</button>-->
+                        <a href="" class="btn btn-success" ng-click="ctrl.addContract()" ng-disabled="ctrl.submitClicked">Save and close</a>
+                        <a href="#dashboard" class="btn btn-warning ">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

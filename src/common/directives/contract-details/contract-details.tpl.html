@@ -1,0 +1,133 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label">Contract Title: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.title"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Contract Status: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.status"
+                           readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Country Office/Global Team: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.department.title"
+                           readonly>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Contract Value: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="number"
+                           ng-model="ctrl.contract.value"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Currency: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.currency.title"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Cost Center Code: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.costcenter.code"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Cost Center Name: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.costcenter.title"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Agreement Type: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="ctrl.contract.type"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Start Date: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="date"
+                           ng-model="ctrl.contract.startdate"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">End Date: <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="date"
+                           ng-model="ctrl.contract.enddate"
+                           readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Contract Managers: <span class="asteriskField">*</span></label>
+                    <span ng-repeat="manager in ctrl.contract.managers" class="form-control">
+                        {{ manager.title }}<br />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label">Comments:</label>
+                    <textarea class="form-control"
+                              rows="3"
+                              ng-model="ctrl.contract.comments"
+                              readonly></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Contract Termination Notice Period(Days): <span class="asteriskField">*</span></label>
+                    <input class="form-control"
+                           type="number"
+                           ng-model="ctrl.contract.noticeperiod"
+                           readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

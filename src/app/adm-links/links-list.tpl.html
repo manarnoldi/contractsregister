@@ -1,0 +1,54 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <back-btn title="Back to Links List" link="dashboard"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.menulinks"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <div ng-hide><add-btn link="addAdminLinks" title="Add New Link"></add-btn></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-condensed table-striped table-hover" 
+                               style="table-layout: fixed;word-wrap: break-word;">
+                            <tbody>
+                                <tr>
+                                    <th>Link Title</th>
+                                    <th style="width: 500px;">Link Url</th>
+                                    <th>Link Icon</th>
+                                    <th>Link Target</th>
+                                    <th style="min-width: 150px"></th>
+                                </tr>
+
+                                <tr dir-paginate="link in ctrl.links | itemsPerPage: 10">
+                                    <td><span>{{link.title}}</span></td>
+                                    <td><span><a href="{{link.url}}" target="_blank">{{link.url}}</a></span></td>
+                                    <td><span>{{link.icon}}</span></td>
+                                    <td><span>{{link.target}}</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-xs btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Action
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="#editAdminLink/{{link.id}}">Edit</a>
+                                                    <a href="#listAdminLinks" ng-click="ctrl.DeleteRecord(link.id)" ng-hide>Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12">
+                        <dir-pagination-controls boundary-links="true" template-url="common/directives/pagination/dirPagination.tpl.html">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <back-btn title="Back to Contracts List" link="dashboard"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.links"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right admin-add-btn">
+                            <a ng-href="{{ctrl.hostWebUrl + '/Lists/Department/AllItems.aspx'}}"
+                               target="_blank" class="btn btn-sm btn-success"><i class="fa fa-cog"></i> Manage Country Office/Global Team</a>
+                        </div>
+                    </div>
+                </div>             
+
+                <!--<add-btn link="addAdminDepartments" title="Manage Country Office/Global Team"></add-btn>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-condensed table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Country Office/Global Team:</th>
+                                    <th>Department Manager/s</th>
+                                    <th>OrderBy</th>
+                                    <!--<th style="min-width: 150px"></th>-->
+                                </tr>
+                                <tr dir-paginate="department in ctrl.departments | itemsPerPage: 10">
+                                    <td><span>{{department.title}}</span></td>
+                                    <td>
+                                        <span ng-repeat="dept in department.managers">
+                                            {{dept.title}}<font ng-show="!$last">,</font>
+                                        </span>
+                                    </td>
+                                    <td><span>{{department.orderby}}</span></td>
+                                    <!--<td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-xs btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Action
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="#editAdminDepartment/{{department.id}}">Edit</a>
+                                                    <a href="#listAdminDepartments" ng-click="ctrl.DeleteRecord(department.id)">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12">
+                        <dir-pagination-controls boundary-links="true" template-url="common/directives/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

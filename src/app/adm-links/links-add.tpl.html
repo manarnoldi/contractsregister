@@ -1,0 +1,67 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <back-btn title="Back to Links List" link="listAdminLinks"></back-btn>
+    <div class="row">
+        <div class="col-md-3">
+            <admin-menu menu-items="ctrl.menulinks"></admin-menu>
+        </div>
+        <div class="col-md-9">
+            <div class="admin-body">
+                <div class="panel panel-info">
+                    <div ng-if="ctrl.action == 'add'" class="panel-heading pnl-heading">ADD LINK INFORMATION</div>
+                    <div ng-if="ctrl.action == 'edit'" class="panel-heading pnl-heading">EDIT LINK INFORMATION</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Link Title: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.link.title"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Link Url: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.link.url"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Link Icon: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.link.icon"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Link Target: <span class="asteriskField">*</span></label>
+                                    <input class="form-control"
+                                           type="text"
+                                           ng-model="ctrl.link.target"
+                                           ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer clearfix">
+                        <div class="form-group pull-right">
+                            <a href="" class="btn btn-success" ng-click="ctrl.AddRecord()">
+                                <i class="fa fa-save"></i> {{  ctrl.action == 'edit' ? 'Update': 'Add' }} Record
+                            </a>
+                            <a href="#listAdminLinks" class="btn btn-warning ">
+                                <i class="fa fa-cut"></i> Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
