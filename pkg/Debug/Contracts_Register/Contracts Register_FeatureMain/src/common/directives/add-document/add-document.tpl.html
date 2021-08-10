@@ -17,7 +17,7 @@
                    ng-model="ctrl.docdetails">
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             <label class="control-label">Attachment <span class="asteriskField">*</span></label>
             <div class="input-group">
@@ -25,6 +25,14 @@
                 <input type="file" placeholder="Attachment" class="form-control input-md file" ng-file-model="ctrl.docattachment">
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
+        <label class="control-label">Does the document contain confidential information, personal data, privileged information or is access to the document restricted by an NDA?: <span class="asteriskField">*</span></label>
+        <span class="guidance">
+            (Personal data includes information such as a personal home address or personal contact details. Privileged information refers to legally protected information e.g. communications between a professional legal advisor and their client. Documents which contain this type of information will only be visible to Contract Managers and Global Procurement)
+        </span><br />
+        <label class="radio-inline"><input type="radio" ng-model="ctrl.confidential" ng-value="true">Yes</label>
+        <label class="radio-inline"><input type="radio" ng-model="ctrl.confidential" ng-value="false">No</label>
     </div>
     <div class="col-md-2">
         <label class="control-label">Action:</label>

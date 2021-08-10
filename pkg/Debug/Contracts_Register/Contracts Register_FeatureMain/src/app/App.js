@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngAnimate', 'directives.dirPagination', 'ui.bootstrap', 'ui.bootstrap.dialogs', 'selectFile', 'services.utilities', 'spNgModule', 'sarsha.spinner',
+        .module('app', ['ngRoute', 'ngAnimate','ngSanitize', 'directives.dirPagination', 'ui.bootstrap', 'ui.bootstrap.dialogs', 'selectFile', 'services.utilities', 'spNgModule', 'sarsha.spinner',
             'angular-growl', 'sp-peoplepicker', 'datatables', 'services.contracts', 'services.costcenters', 'services.departments', 'services.currencies', 'services.doctypes', 'services.contract-suppliers',
             'services.contract-documents', 'services.settings', 'services.links', 'services.contract-renewals', 'dir.adminmenu', 'dir.backbtn', 'dir.addbtn', 'dir.contractdetails', 'dir.links','dir.adddocument', 'dir.addsupplier', 'departments', 'costcenters',
             'doctypes', 'currencies', 'settings', 'links', 'contracts', 'contractsAdd'])

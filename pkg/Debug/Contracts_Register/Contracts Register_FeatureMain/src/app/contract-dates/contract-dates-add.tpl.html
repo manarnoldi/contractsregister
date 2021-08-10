@@ -57,10 +57,13 @@
                                 <div class="form-group">
                                     <label class="control-label">Contract Value: <span class="asteriskField">*</span></label>
                                     <span>(The total value over the lifetime of the contract, excl. possible extensions)</span>
+                                    <span ng-if="ctrl.action == 'details'" class="form-control" ng-readonly>
+                                        {{ (ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor || ctrl.showcontractvalue) ? ctrl.contract.value : 'CONFIDENTIAL' }}
+                                    </span>
                                     <input class="form-control"
                                            type="number"
                                            ng-model="ctrl.contract.value"
-                                           ng-readonly="ctrl.action == 'details'">
+                                           ng-if="ctrl.action != 'details'">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -197,10 +200,13 @@
                                 <div class="form-group">
                                     <label class="control-label">Total value of possible extensions:</label>
                                     <span>(Total value of all possible contract extension periods (exclu original contract value))</span>
+                                    <span ng-if="ctrl.action == 'details'" class="form-control" ng-readonly>
+                                        {{ ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor || ctrl.showcontractvalue ? ctrl.contract.extentionvalue : 'CONFIDENTIAL' }}
+                                    </span>
                                     <input class="form-control"
                                            type="number"
                                            ng-model="ctrl.contract.extentionvalue"
-                                           ng-readonly="ctrl.action == 'details'">
+                                           ng-if="ctrl.action != 'details'">
                                 </div>
                             </div>
                         </div>
@@ -217,7 +223,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Contract Termination Notice Period (Days): <span class="asteriskField">*</span></label>
-                                    <span>
+                                    <span class="guidance">
                                         (This the minimum number of days before the contract ends when written notice to suppliers must be given by in order to end the contract)
                                     </span>
                                     <input class="form-control"
@@ -231,7 +237,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label">Link to Procurement Documents:</label>
-                                    <span>
+                                    <span class="guidance">
                                         (link to the procurement file on the relevant Country Office/ Global Team SharePoint team site)
                                     </span>
                                     <input class="form-control"
@@ -315,7 +321,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="contract-table">
+                            <div class="contract-table" style="overflow:scroll">
                                 <table class="table table-bordered table-condensed table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -347,13 +353,14 @@
             </div>
             <div class="panel panel-warning">
                 <div class="panel-heading pnl-heading">Contract suppliers</div>
+
                 <div class="panel-body">
                     <div class="well well-sm" ng-if="ctrl.action == 'add'">
                         <add-supplier></add-supplier>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="contract-table">
+                            <div class="contract-table" style="overflow:scroll">
                                 <table class="table table-bordered table-condensed table-striped table-hover">
                                     <thead>
                                         <tr ng-if="ctrl.action == 'add'">
@@ -363,6 +370,7 @@
                                             <th style="min-width:200px;">Supplier Email & Phone</th>
                                             <th style="min-width:200px;">Supplier Website</th>
                                             <th style="min-width:200px;">Salesforce Id</th>
+                                            <th style="min-width:100px;">Confidential</th>
                                             <th style="width:110px">Action</th>
                                         </tr>
                                         <tr ng-if="ctrl.action != 'add'">
@@ -372,6 +380,7 @@
                                             <th style="min-width:200px;">Supplier Email & Phone</th>
                                             <th style="min-width:200px;">Supplier Website</th>
                                             <th style="min-width:200px;">Salesforce Id</th>
+                                            <th style="min-width:100px;">Confidential</th>
                                             <th style="min-width:120px;">Upload By</th>
                                             <th style="min-width:120px;">Upload Date</th>
                                         </tr>
@@ -384,16 +393,48 @@
                                             <td><span>{{supplier.emailphone}}</span></td>
                                             <td><span>{{supplier.website}}</span></td>
                                             <td><span>{{supplier.salesforceid}}</span></td>
+                                            <td><span>{{supplier.confidential}}</span></td>
                                             <td><a href="" class="btn btn-xs btn-danger" ng-click="ctrl.RemoveSupplier(supplier)" ng-if="ctrl.action != 'details'">Remove</a></td>
                                         </tr>
 
                                         <tr ng-repeat="supplier in ctrl.contract.suppliers" ng-if="ctrl.action != 'add'">
                                             <td><span>{{supplier.title}}</span></td>
-                                            <td><span>{{supplier.contacts}}</span></td>
-                                            <td><span>{{supplier.address}}</span></td>
-                                            <td><span>{{supplier.emailphone}}</span></td>
+                                            <td>
+                                                <span>
+                                                    {{ !supplier.confidential || ctrl.showsupplierdetails || ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor || ctrl.showsuppliercontactnameconf ? supplier.contacts : 'CONFIDENTIAL' }}
+                                                    &nbsp;
+                                                    <i ng-if="supplier.confidential && !ctrl.showsupplierdetails && !ctrl.isAdmin && !ctrl.contract.curusermanager && !ctrl.contract.curusereditor && !ctrl.showsuppliercontactnameconf"
+                                                       tooltip-placement="right-top"
+                                                       uib-tooltip="Supplier's contact name is considered 'personal data' and is only visible to the VSO Contract Manager."
+                                                       class="fa fa-info-circle"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{ !supplier.confidential || ctrl.showsupplierdetails || ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor || ctrl.showsupplierphysicaladdressconf ? supplier.address : 'CONFIDENTIAL' }}
+                                                    &nbsp;
+                                                    <i ng-if="supplier.confidential && !ctrl.showsupplierdetails && !ctrl.isAdmin && !ctrl.contract.curusermanager && !ctrl.contract.curusereditor && !ctrl.showsupplierphysicaladdressconf"
+                                                       tooltip-placement="right-top"
+                                                       uib-tooltip="Supplier's physical address is considered 'personal data' and is only visible to the VSO Contract Manager."
+                                                       class="fa fa-info-circle"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{ !supplier.confidential || ctrl.showsupplierdetails || ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor || ctrl.showsupplieremailandphoneconf ? supplier.emailphone : 'CONFIDENTIAL' }}
+                                                    &nbsp;
+                                                    <i ng-if="supplier.confidential && !ctrl.showsupplierdetails && !ctrl.isAdmin && !ctrl.contract.curusermanager && !ctrl.contract.curusereditor && !ctrl.showsupplieremailandphoneconf"
+                                                       tooltip-placement="right-top"
+                                                       uib-tooltip="Supplier's email & phone is considered 'personal data' and is only visible to the VSO Contract Manager."
+                                                       class="fa fa-info-circle"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                            </td>
                                             <td><span><a target="_blank" ng-href="{{supplier.website}}">{{supplier.website}}</a></span></td>
                                             <td><span>{{supplier.salesforceid}}</span></td>
+                                            <td><span>{{supplier.confidential ? "Yes": "No"}}</span></td>
                                             <td><span>{{supplier.uploadby.title}}</span></td>
                                             <td><span>{{supplier.uploaddate | date: 'dd/MM/yyyy HH:mm:ss' : 'europe/london'}}</span></td>
                                         </tr>
@@ -413,19 +454,21 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="contract-table">
+                            <div class="contract-table" style="overflow:scroll">
                                 <table class="table table-bordered table-condensed table-striped table-hover">
                                     <thead>
                                         <tr ng-if="ctrl.action == 'add'">
                                             <th style="min-width:150px;">Document Title</th>
                                             <th style="min-width:150px;">Document Type</th>
                                             <th style="min-width:200px;">Document Description</th>
+                                            <th style="min-width:100px;">Confidential</th>
                                             <th style="width:110px">Action</th>
                                         </tr>
                                         <tr ng-if="ctrl.action != 'add'">
                                             <th style="min-width:150px;">Document Title</th>
                                             <th style="min-width:150px;">Document Type</th>
                                             <th style="min-width:200px;">Document Description</th>
+                                            <th style="min-width:100px;">Confidential</th>
                                             <th style="min-width:120px;">Upload By</th>
                                             <th style="min-width:120px;">Upload Date</th>
                                             <th style="width:110px">Action</th>
@@ -436,12 +479,27 @@
                                             <td><span>{{doc.attachment.name}}</span></td>
                                             <td><span>{{doc.type.title}}</span></td>
                                             <td><span>{{doc.details}}</span></td>
+                                            <td><span>{{doc.confidential}}</span></td>
                                             <td><a href="" class="btn btn-xs btn-danger" ng-if="ctrl.action != 'details'" ng-click="ctrl.RemoveDocument(doc)">Remove</a></td>
                                         </tr>
                                         <tr ng-repeat="doc in ctrl.contract.documents | orderBy: '-uploaddate'" ng-if="ctrl.action != 'add'">
-                                            <td><a href="{{doc.link.href}}?&web=1" target="_blank">{{doc.link.title}}</a></td>
+                                            <td>
+                                                <span ng-if="!doc.confidential ||  ctrl.isAdmin || ctrl.contract.curusermanager || ctrl.contract.curusereditor">
+                                                    <a href="{{doc.link.href}}?&web=1" target="_blank">
+                                                        {{doc.link.title}}
+                                                    </a>
+                                                </span>
+                                                <span ng-if="doc.confidential &&  !ctrl.isAdmin && !ctrl.contract.curusermanager && !ctrl.contract.curusereditor">
+                                                    CONFIDENTIAL&nbsp;
+                                                    <i tooltip-placement="right-top"
+                                                       uib-tooltip="Uploaded documents which do not have embedded links can only be accessed by the Contract Manager. Please contact the Contract Manager if you need a copy of the document"
+                                                       class="fa fa-info-circle"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                            </td>
                                             <td><span>{{doc.type.title}}</span></td>
                                             <td><span>{{doc.details}}</span></td>
+                                            <td><span>{{doc.confidential ? "Yes": "No"}}</span></td>
                                             <td><span>{{doc.uploadby.title}}</span></td>
                                             <td><span>{{doc.uploaddate | date: 'dd/MM/yyyy HH:mm:ss' : 'europe/london'}}</span></td>
                                             <td><a href="" class="btn btn-xs btn-danger" ng-if="ctrl.contract.curusermanager && ctrl.action == 'renew'" ng-click="ctrl.RemoveDocument(doc)">Delete</a></td>

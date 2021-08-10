@@ -175,3 +175,21 @@ hr {
     border: 0 !important;
     border-top: 1px solid #eee !important;
 }
+.span-border {
+    border: 1px solid #e6b2d5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.guidance {
+    font-size: 12px;
+}
+
+.confidential {
+    color: #b20000;
+}
+
+.tooltip-inner {
+    max-width: 400px !important;
+}

@@ -15,7 +15,7 @@
 
         svc.getAllItems = function (contractid) {
             var defer = $q.defer();
-            var queryParams = "$select=Id,Title,Contract/Id,Contract/Title,DocumentDetails,DocumentType/Id,DocumentType/Title,FileRef,FileLeafRef,Created,Author/Id,Author/Title&$" +
+            var queryParams = "$select=Id,Title,Contract/Id,Contract/Title,DocumentDetails,DocumentType/Id,DocumentType/Title,FileRef,FileLeafRef,Created,Author/Id,Author/Title,Confidential&$" +
                 "expand=DocumentType,Contract,Author&$filter=Contract/Id eq " + contractid;
 
             ShptRestService
@@ -23,7 +23,6 @@
                 .then(function (data) {
                     contractDocumentsList = [];
                     _.forEach(data.results, function (o) {
-
                         var doc = {};
                         doc.id = o.Id;
                         doc.title = o.Title;
@@ -33,6 +32,7 @@
                         doc.link = { href: o.FileRef, title: o.FileLeafRef };
                         doc.uploaddate = new Date(o.Created);
                         doc.uploadby = _.isNil(o.Author) ? '' : { id: o.Author.Id, title: o.Author.Title };
+                        doc.confidential = o.Confidential;
                         contractDocumentsList.push(doc);
                     });
                     defer.resolve(_.orderBy(contractDocumentsList, ['uploaddate'], ['desc']));
@@ -56,7 +56,8 @@
                     Title: doc.attachment.name,
                     DocumentDetails: doc.details,
                     DocumentTypeId: doc.type.id,
-                    ContractId: contractid
+                    ContractId: contractid,
+                    Confidential: doc.confidential
                 };
                 addProms.push(ShptRestService.uploadFileToDocumentLibrary(listname, "/", doc.attachment, data));
             });

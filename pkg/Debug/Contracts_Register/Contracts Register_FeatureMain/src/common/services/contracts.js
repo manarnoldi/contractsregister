@@ -365,5 +365,55 @@
                 });
             return defManager.promise;
         };
+
+        svc.DeleteItem = function (contractid) {
+            var deferDelete = $q.defer();
+            if (contractid) {
+                var delProms = [];
+                //Get Delete contract documents
+                delProms.push(contractDocumentsSvc.getAllItems(contractid));
+
+                //Get Delete contract renewals
+                delProms.push(contractRenewalsSvc.getAllItems(contractid));
+
+                //Get Delete contract suppliers
+                delProms.push(contractSuppliersSvc.getAllItems(contractid));
+
+                $q
+                    .all(delProms)
+                    .then(function (contractData) {
+                        delProms = [];
+                        _.forEach(contractData[0], function (cd) {
+                            delProms.push(contractDocumentsSvc.DeleteItem(cd.id, contractid));
+                        });
+
+                        _.forEach(contractData[1], function (cr) {
+                            delProms.push(contractRenewalsSvc.DeleteItem(cr.id, contractid));
+                        });
+
+                        _.forEach(contractData[2], function (cs) {
+                            delProms.push(contractSuppliersSvc.DeleteItem(cs.id, contractid));
+                        });
+                        delProms.push(ShptRestService.deleteListItem(listname, contractid));
+
+                        $q
+                            .all(delProms)
+                            .then(function (rt) {
+                                deferDelete.resolve(true);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                                deferDelete.reject("An error occured while deleting the item. Contact IT Service desk for support.");
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        deferDelete.reject("An error occured!. Contact IT Service desk for support.");
+                    });
+            } else {
+                deferDelete.reject('Item to be deleted is missing Id. Contact IT Service desk for support.');
+            }
+            return deferDelete.promise;
+        };
     }
 })();

@@ -14,6 +14,19 @@
         spinnerService.show('spinner1');
         ctrl.hostWebUrl = contractsSvc.hostWebUrl;
         ctrl.contract = {};
+
+        ctrl.showsupplierdetails = true;
+        ctrl.showcontractvalue = true;
+
+        ctrl.showsuppliercontactname = false;
+        ctrl.showsupplierphysicaladdress = false;
+        ctrl.showsupplieremailandphone = false;
+
+
+        ctrl.isAdmin = false;
+
+        ctrl.confidential = false;
+
         ctrl.contract.suppliers = [];
         ctrl.contract.documents = [];
         ctrl.action = $route.current.$$route.param;
@@ -26,6 +39,8 @@
         promises.push(docTypesSvc.getAllItems());
         promises.push(currenciesSvc.getAllItems());
         promises.push(settingsSvc.getSettings());
+        promises.push(settingsSvc.checkIfCurrentUserIsAdmin());
+
         if ($routeParams.id) {
             promises.push(contractsSvc.getContractById($routeParams.id));
         }
@@ -38,11 +53,18 @@
                 ctrl.documenttypes = results[2];
                 ctrl.currencies = results[3];
                 ctrl.settings = results[4];
+                ctrl.isAdmin = results[5];
+
+                ctrl.showsupplierdetails = (_.find(ctrl.settings, ['code', 'SR004'])).value == "Yes";
+                ctrl.showcontractvalue = (_.find(ctrl.settings, ['code', 'SR005'])).value == "Yes";
+                ctrl.showsuppliercontactnameconf = (_.find(ctrl.settings, ['code', 'SR006'])).value == "Yes";;
+                ctrl.showsupplierphysicaladdressconf = (_.find(ctrl.settings, ['code', 'SR007'])).value == "Yes";;
+                ctrl.showsupplieremailandphoneconf = (_.find(ctrl.settings, ['code', 'SR008'])).value == "Yes";;
 
                 ctrl.statuses = ["Active", "Expired"]
                 ctrl.types = ["Contract", "Framework Agreement", "Property Lease"];
                 if ($routeParams.id) {
-                    ctrl.contract = results[5];
+                    ctrl.contract = results[6];
                 } else {
                     ctrl.contract.status = "Active";
                     ctrl.contract.type = "Contract";
@@ -93,6 +115,7 @@
             supplier.emailphone = ctrl.supplieremailphone;
             supplier.website = ctrl.website;
             supplier.salesforceid = ctrl.salesforceid;
+            supplier.confidential = ctrl.confidential;
 
             if (ctrl.action == "add") {
                 ctrl.contract.suppliers.push(supplier);
@@ -102,6 +125,7 @@
                 ctrl.supplieremailphone = "";
                 ctrl.website = "";
                 ctrl.salesforceid = "";
+                ctrl.confidential = false;
             } else {
                 var supps = [];
                 supps.push(supplier);
@@ -121,6 +145,7 @@
                                         ctrl.supplieremailphone = "";
                                         ctrl.website = "";
                                         ctrl.salesforceid = "";
+                                        ctrl.confidential = false;
                                         growl.success('Supplier added to the contract successfully!');
                                     })
                                     .catch(function (error) {
@@ -189,6 +214,8 @@
             doc.type = ctrl.doctype;
             doc.details = ctrl.docdetails;
             doc.attachment = ctrl.docattachment;
+            doc.confidential = ctrl.confidential;
+
             if (ctrl.action == "add") {
                 ctrl.contract.documents.push(doc);
                 ctrl.doctype = "";
@@ -490,6 +517,25 @@
                         .finally(function () {
                             spinnerService.closeAll();
                         });
+                });
+        };
+
+        ctrl.deleteContract = id => {
+            $dialogConfirm('Are you sure you want to delete the whole contract? This will delete the contract, any contract renewals available, all contract suppliers defined and any contract documents uploaded.', 'Confirm Transaction')
+                .then(function () {
+                    spinnerService.show('spinner1');
+                    contractsSvc
+                        .DeleteItem(id)
+                        .then(function (res) {
+                            growl.success("Contract record deleted successfully!");
+                            $location.path("/dashboard");
+                        })
+                        .catch(function (error) {
+                            growl.error(error);
+                        })
+                        .finally(function () {
+                            spinnerService.closeAll();
+                        })
                 });
         };
 

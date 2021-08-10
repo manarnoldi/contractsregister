@@ -15,7 +15,8 @@
 
         svc.getAllItems = function (contractid) {
             var defer = $q.defer();
-            var queryParams = "$select=Id,Title,SupplierContact,PhysicalAddress,EmailPhone,Website,Contract/Id,Contract/Title,Created,Author/Id,Author/Title,SalesforceId&$expand=Contract,Author&$filter=Contract/Id eq " + contractid;
+            var queryParams = "$select=Id,Title,SupplierContact,PhysicalAddress,EmailPhone,Website,Contract/Id,Contract/Title,Created,Author/Id,Author/Title,SalesforceId,Confidential" +
+                "&$expand=Contract,Author&$filter=Contract/Id eq " + contractid;
             ShptRestService
                 .getListItems(listname, queryParams)
                 .then(function (data) {
@@ -30,6 +31,7 @@
                         supplier.emailphone = o.EmailPhone;
                         supplier.website = o.Website;
                         supplier.salesforceid = o.SalesforceId;
+                        supplier.confidential = o.Confidential;
                         supplier.uploaddate = new Date(o.Created);
                         supplier.uploadby = _.isNil(o.Author) ? '' : { id: o.Author.Id, title: o.Author.Title };
                         contractSuppliersList.push(supplier);
@@ -55,7 +57,8 @@
                         EmailPhone: supplier.emailphone,
                         Website: supplier.website,
                         SalesforceId: supplier.salesforceid,
-                        ContractId: contractid
+                        ContractId: contractid,
+                        Confidential: supplier.confidential
                     };
                     addProms.push(ShptRestService.createNewListItem(listname, data));
                 });

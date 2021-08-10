@@ -36,6 +36,8 @@
     <script type="text/javascript" src="common/directives/pagination/dirPagination.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min.js"></script>
+    
     <script type="text/javascript" src="common/directives/ui-bootstrap-dialogs.js"></script>
     <script type="text/javascript" src="common/utilities/sp-ng-module.js"></script>
     <script type="text/javascript" src="common/directives/spinner/loading-spinner.js"></script>
@@ -94,10 +96,15 @@
                         <div growl class="font-bold"></div>
                         <div class="panel panel-warning">
                             <div class="panel-heading pnl-heading">
-                                <span>VSO Contracts Register</span>                               
+                                <span>VSO Contracts Register</span>
+                                <span class="pull-right" style="color: red;">NB: Information on the Contract Register is confidential and should not be shared outside of VSO.
+                                </span>
                             </div>
                             <div class="panel-body" style="min-height: 525px;" ng-view autoscroll></div>
-                            <div class="panel-footer clearfix"><span class="pull-right">© 2020 VSO International, Global Procurement Team</span></div>
+                            <div class="panel-footer clearfix">
+                                <span class="pull-right" id="copyrightinfo">© 2021 VSO International, Global Procurement Team
+                                </span>
+                            </div>
                             <sarsha-spinner name="spinner1"></sarsha-spinner>
                         </div>
                     </div>

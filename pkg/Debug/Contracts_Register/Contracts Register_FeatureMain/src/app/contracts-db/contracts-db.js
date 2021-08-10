@@ -5,8 +5,8 @@
         .module('contracts', [])
         .controller('contractsCtrl', ContractsCtrlFunction);
 
-    ContractsCtrlFunction.$inject = ['$q', '$route', '$routeParams', 'linksSvc', '$dialogAlert', 'contractsSvc', 'departmentsSvc', 'spinnerService', 'growl', 'settingsSvc'];
-    function ContractsCtrlFunction($q, $route, $routeParams, linksSvc, $dialogAlert, contractsSvc, departmentsSvc, spinnerService, growl, settingsSvc) {
+    ContractsCtrlFunction.$inject = ['$q', '$route', '$routeParams', 'linksSvc', '$dialogConfirm', '$location','contractsSvc', 'departmentsSvc', 'spinnerService', 'growl', 'settingsSvc'];
+    function ContractsCtrlFunction($q, $route, $routeParams, linksSvc, $dialogConfirm, $location, contractsSvc, departmentsSvc, spinnerService, growl, settingsSvc) {
         var ctrl = this;
         spinnerService.show('spinner1');
         ctrl.expiryninetydays = 0;
@@ -17,6 +17,8 @@
         ctrl.contracts = [];
         ctrl.datesreadonly = false;
         ctrl.isAdmin = false;
+        ctrl.showsupplierdetails = true;
+        ctrl.showcontractvalue = true;
         ctrl.teamid = parseInt($routeParams.teamid);
         ctrl.status = $routeParams.status;
 
@@ -29,6 +31,7 @@
         promises.push(settingsSvc.checkIfCurrentUserIsAdmin());
         promises.push(contractsSvc.getContractsSearched(ctrl.teamid, ctrl.status));
         promises.push(linksSvc.getAllItems());
+        promises.push(settingsSvc.getSettings());
 
         $q
             .all(promises)
@@ -38,6 +41,8 @@
                 ctrl.isAdmin = results[1];
                 ctrl.contracts = results[2];
                 ctrl.guideslinks = results[3];
+                ctrl.showsupplierdetails = (_.find(results[4], ['code', 'SR004'])).value == "Yes";
+                ctrl.showcontractvalue = (_.find(results[4], ['code', 'SR005'])).value == "Yes";
                 LoadSummaries(ctrl.contracts);
                 ctrl.statuses = ["Active", "Expired"];
                 ctrl.types = ["Contract", "Framework Agreement"];
@@ -109,6 +114,25 @@
                 });
             }
             spinnerService.closeAll();
+        };
+
+        ctrl.deleteContract = id => {
+            $dialogConfirm('Are you sure you want to delete the whole contract? This will delete the contract, any contract renewals available, all contract suppliers defined and any contract documents uploaded.', 'Confirm Transaction')
+                .then(function () {
+                    spinnerService.show('spinner1');
+                    contractsSvc
+                        .DeleteItem(id)
+                        .then(function (res) {
+                            growl.success("Contract record deleted successfully!");
+                            $location.path("/dashboard");
+                        })
+                        .catch(function (error) {
+                            growl.error(error);
+                        })
+                        .finally(function () {
+                            spinnerService.closeAll();
+                        })
+                });
         };
     }
 })();
