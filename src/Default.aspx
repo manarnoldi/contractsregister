@@ -102,7 +102,7 @@
                             </div>
                             <div class="panel-body" style="min-height: 525px;" ng-view autoscroll></div>
                             <div class="panel-footer clearfix">
-                                <span class="pull-right" id="copyrightinfo">© 2021 VSO International, Global Procurement Team
+                                <span class="pull-right" id="copyrightinfo">© 2024 VSO International, Global Procurement Team
                                 </span>
                             </div>
                             <sarsha-spinner name="spinner1"></sarsha-spinner>

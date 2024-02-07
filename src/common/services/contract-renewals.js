@@ -44,11 +44,11 @@
             return defer.promise;
         };
 
-        svc.AddItem = function (renewal, contractid) {
-            if (renewal && contractid) {
+        svc.AddItem = function (renewal, contract) {
+            if (renewal && contract.id) {
                 var deferAddRenewal = $q.defer();
                 svc
-                    .getAllItems(contractid)
+                    .getAllItems(contract.id)
                     .then(function (renewals) {
                         var itemExists = _.some(renewals, function (r) {
                             return ((renewal.startdate <= r.enddate) || (renewal.enddate <= r.enddate));
@@ -58,25 +58,49 @@
                             deferAddRenewal.reject("The renewal dates are already covered in previous dates. Contact IT Service desk for support.");
                         } else {
                             var data = {
-                                Title: "Contract Renewal for Contract Id " + contractid,
+                                Title: "Contract Renewal for Contract Id " + contract.id,
                                 Value: renewal.value,
                                 StartDate: renewal.startdate,
                                 EndDate: renewal.enddate,
                                 CurrencyId: renewal.currency.id,
-                                ContractId: contractid
+                                ContractId: contract.id
                             };
                             ShptRestService
                                 .createNewListItem(listname, data)
                                 .then(function (results) {
-                                    svc
-                                        .getAllItems(contractid)
-                                        .then(function (renewals) {
-                                            deferAddRenewal.resolve(_.orderBy(renewals, ['startdate'], ['desc']));
+                                    var dataExt = {};
+                                    if (renewal.enddate > contract.enddate) {                                       
+                                        dataExt.ExtensionEndDate = renewal.enddate;
+                                        dataExt.ShowExtensionEndDate = true;
+                                    } else {
+                                        dataExt.ExtensionEndDate = contract.enddate;
+                                        dataExt.ShowExtensionEndDate = false;
+                                    }
+
+                                    if (dataExt.ExtensionEndDate > new Date()) {
+                                        dataExt.ContractStatus = "Active";
+                                    } else {
+                                        dataExt.ContractStatus = "Expired";
+                                    }
+
+                                    ShptRestService
+                                        .updateListItem("Contracts", contract.id, dataExt)
+                                        .then(function (res) {
+                                            svc
+                                                .getAllItems(contract.id)
+                                                .then(function (renewals) {
+                                                    deferAddRenewal.resolve(_.orderBy(renewals, ['startdate'], ['desc']));
+                                                })
+                                                .catch(function (error) {
+                                                    console.log(error);
+                                                    deferAddRenewal.reject("An error occured while getting the items. Contact IT Service desk for support.");
+                                                });
                                         })
                                         .catch(function (error) {
                                             console.log(error);
-                                            deferAddRenewal.reject("An error occured while getting the items. Contact IT Service desk for support.");
+                                            deferAddRenewal.reject("An error occured while adding the item. Contact IT Service desk for support.");
                                         });
+
                                 })
                                 .catch(function (error) {
                                     console.log(error);
@@ -88,21 +112,41 @@
             }
         };
 
-        svc.DeleteItem = function (id, contractid) {
+        svc.DeleteItem = function (id, contract) {
             var defer = $q.defer();
             if (id) {
                 ShptRestService
                     .deleteListItem(listname, id)
                     .then(function () {
-                        svc
-                            .getAllItems(contractid)
-                            .then(function (renewals) {
-                                defer.resolve(_.orderBy(renewals, ['title'], ['asc']));
+                        var dataExt = {
+                            ExtensionEndDate: contract.enddate,
+                            ShowExtensionEndDate: false
+                        };
+
+                        if (dataExt.ExtensionEndDate > new Date()) {
+                            dataExt.ContractStatus = "Active";
+                        } else {
+                            dataExt.ContractStatus = "Expired";
+                        }
+
+                        ShptRestService
+                            .updateListItem("Contracts", contract.id, dataExt)
+                            .then(function (res) {
+                                svc
+                                    .getAllItems(contract.id)
+                                    .then(function (renewals) {
+                                        defer.resolve(_.orderBy(renewals, ['title'], ['asc']));
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                        defer.reject("An error occured while getting the items. Contact IT Service desk for support.");
+                                    });
                             })
                             .catch(function (error) {
                                 console.log(error);
                                 defer.reject("An error occured while getting the items. Contact IT Service desk for support.");
                             });
+                        
                     })
                     .catch(function (error) {
                         console.log(error);

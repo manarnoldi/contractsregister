@@ -1,1 +1,1 @@
-C:\Users\arnold.shangala\source\repos\Contracts Register\bin\Debug\app.publish\2.1.4.3\Contracts Register.app
+C:\Users\arnold.shangala\source\repos\Contracts Register\bin\Debug\app.publish\2.3.0.3\Contracts Register.app

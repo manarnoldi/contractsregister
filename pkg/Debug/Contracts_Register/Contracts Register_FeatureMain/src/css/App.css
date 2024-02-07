@@ -1,4 +1,8 @@
 ﻿/* Place custom styles below */
+.app-back-color {
+    background-color: #EECCE3;
+}
+
 .pnl-heading {
     font-size: 16px;
     font-weight: 600;
@@ -175,6 +179,7 @@ hr {
     border: 0 !important;
     border-top: 1px solid #eee !important;
 }
+
 .span-border {
     border: 1px solid #e6b2d5;
     padding: 10px;
@@ -192,4 +197,11 @@ hr {
 
 .tooltip-inner {
     max-width: 400px !important;
+}
+
+.teamBoxRptStyle {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid blue;
+    border-radius: 15px;
 }

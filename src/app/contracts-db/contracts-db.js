@@ -5,9 +5,12 @@
         .module('contracts', [])
         .controller('contractsCtrl', ContractsCtrlFunction);
 
-    ContractsCtrlFunction.$inject = ['$q', '$route', '$routeParams', 'linksSvc', '$dialogConfirm', '$location','contractsSvc', 'departmentsSvc', 'spinnerService', 'growl', 'settingsSvc'];
-    function ContractsCtrlFunction($q, $route, $routeParams, linksSvc, $dialogConfirm, $location, contractsSvc, departmentsSvc, spinnerService, growl, settingsSvc) {
+    ContractsCtrlFunction.$inject = ['$q', '$route', '$routeParams', 'linksSvc', '$dialogConfirm', '$location', 'contractsSvc',
+        'departmentsSvc', 'contractSuppliersSvc', 'spinnerService', 'growl', 'settingsSvc'];
+    function ContractsCtrlFunction($q, $route, $routeParams, linksSvc, $dialogConfirm, $location, contractsSvc, departmentsSvc,
+        contractSuppliersSvc, spinnerService, growl, settingsSvc) {
         var ctrl = this;
+        var suppliers = [];
         spinnerService.show('spinner1');
         ctrl.expiryninetydays = 0;
         ctrl.expirysixetydays = 0;
@@ -32,6 +35,7 @@
         promises.push(contractsSvc.getContractsSearched(ctrl.teamid, ctrl.status));
         promises.push(linksSvc.getAllItems());
         promises.push(settingsSvc.getSettings());
+        promises.push(contractSuppliersSvc.getAllItems());
 
         $q
             .all(promises)
@@ -40,6 +44,11 @@
                 ctrl.department = _.find(ctrl.departments, ['id', ctrl.teamid]);
                 ctrl.isAdmin = results[1];
                 ctrl.contracts = results[2];
+                suppliers = results[5];
+                for (var c = 0; c < ctrl.contracts.length; c++) {
+                    ctrl.contracts[c].suppliers = _.filter(suppliers, function (supplier) { return supplier.contract.id == ctrl.contracts[c].id });
+                    ctrl.contracts[c].curusermanager = _.some(_.find(ctrl.departments, ['id', ctrl.contracts[c].department.id]).managers, ['Id', _spPageContextInfo.userId]);
+                }
                 ctrl.guideslinks = results[3];
                 ctrl.showsupplierdetails = (_.find(results[4], ['code', 'SR004'])).value == "Yes";
                 ctrl.showcontractvalue = (_.find(results[4], ['code', 'SR005'])).value == "Yes";
@@ -47,7 +56,7 @@
                 ctrl.statuses = ["Active", "Expired"];
                 ctrl.types = ["Contract", "Framework Agreement"];
                 //ctrl.status = "Active";
-                ctrl.type = "Contract";                
+                ctrl.type = "Contract";
             })
             .catch(function (error) {
                 growl.error(error);

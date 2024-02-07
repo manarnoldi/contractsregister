@@ -15,8 +15,15 @@
 
         svc.getAllItems = function (contractid) {
             var defer = $q.defer();
-            var queryParams = "$select=Id,Title,SupplierContact,PhysicalAddress,EmailPhone,Website,Contract/Id,Contract/Title,Created,Author/Id,Author/Title,SalesforceId,Confidential" +
-                "&$expand=Contract,Author&$filter=Contract/Id eq " + contractid;
+            var queryParams = "";
+            if (contractid) {
+                queryParams = "$select=Id,Title,SupplierContact,PhysicalAddress,EmailPhone,Website,Contract/Id,Contract/Title,Created,Author/Id,Author/Title,SalesforceId,Confidential" +
+                    "&$expand=Contract,Author&$filter=Contract/Id eq " + parseInt(contractid);
+            } else {
+                queryParams = "$select=Id,Title,SupplierContact,PhysicalAddress,EmailPhone,Website,Contract/Id,Contract/Title,Created,Author/Id,Author/Title,SalesforceId,Confidential" +
+                    "&$expand=Contract,Author";
+            }
+
             ShptRestService
                 .getListItems(listname, queryParams)
                 .then(function (data) {

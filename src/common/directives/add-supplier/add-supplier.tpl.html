@@ -46,10 +46,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Salesforce Organisation ID / Person ID: <span class="asteriskField">*</span></label>
-                        <span class="guidance">
-                            (This is available on Salesforce and is in the following format: “ORG­­­­xxxxxxx”. Where the supplier is an individual consultant, the format may be “PERxxxxxxx”)
-                        </span>
+                        <label class="control-label">
+                            Salesforce Organisation ID / Person ID: <span class="asteriskField">*</span>
+                            <i tooltip-placement="right-top"
+                               class="fa fa-info-circle"
+                               aria-hidden="true"
+                               uib-tooltip="(This is available on Salesforce and is in the following format: “ORG­­­­xxxxxxx”. Where the supplier is an individual consultant, the format may be “PERxxxxxxx”)">
+                            </i>
+                        </label>
                         <input class="form-control"
                                type="text"
                                ng-model="ctrl.salesforceid">
@@ -58,7 +62,7 @@
                 <div class="col-md-6">
                     <label class="control-label">Confidentiality Restrictions: <span class="asteriskField">*</span></label>
                     <span class="guidance">
-                        (If the supplier’s contact details are considered “personal data” i.e. a personal address or personal email & phone number, please click in the checkbox below to hide the details from general view. These details will only be visible to the VSO Contract Manager.)
+                        (If the supplier’s contact details are considered “personal data” i.e. a personal address or personal email & phone number, please select the YES option below to hide the details from general view. These details will only be visible to the VSO Contract Manager.)
                     </span><br />
                     <label class="radio-inline"><input type="radio" ng-model="ctrl.confidential" ng-value="true">Yes</label>
                     <label class="radio-inline"><input type="radio" ng-model="ctrl.confidential" ng-value="false">No</label>

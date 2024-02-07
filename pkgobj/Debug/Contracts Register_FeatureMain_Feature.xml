@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="SharePoint Add-in Feature" Id="85013546-2bd7-4a0d-92e5-f62cbfaede9e" Scope="Web" Title="Contracts Register FeatureMain" Version="2.1.4.3">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="SharePoint Add-in Feature" Id="85013546-2bd7-4a0d-92e5-f62cbfaede9e" Scope="Web" Title="Contracts Register FeatureMain" Version="2.3.0.3">
   <ElementManifests>
     <ElementManifest Location="Pages\Elements.xml" />
     <ElementManifest Location="Scripts\Elements.xml" />

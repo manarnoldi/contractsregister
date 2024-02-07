@@ -18,7 +18,7 @@
             var queryParams = "";
             if (deptid) {
                 queryParams = "$select=Id,Title,Managers/Id,Managers/Title,OrderBy&$expand=Managers&$filter=Id eq " + parseInt(deptid);
-            } else {                
+            } else {
                 queryParams = "$select=Id,Title,Managers/Id,Managers/Title,OrderBy&$expand=Managers";
             }
 
@@ -29,7 +29,7 @@
                     _.forEach(data.results, function (o) {
                         var dept = {};
                         dept.id = o.Id;
-                        dept.title = o.Title;                       
+                        dept.title = o.Title;
                         dept.managers = [];
                         _.forEach(o.Managers.results, function (m) {
                             dept.managers.push({ id: m.Id, title: m.Title });
@@ -48,10 +48,11 @@
         svc.currentUserManager = function (deptid) {
             var deferUserMng = $q.defer();
             if (deptid) {
-                svc
-                    .getAllItems(deptid)
+                var qryParams = "$select=Id,Title,Managers/Id,Managers/Title,OrderBy&$expand=Managers";
+                ShptRestService
+                    .getListItemById(listname, deptid, qryParams)
                     .then(function (dept) {
-                        deferUserMng.resolve(_.some(dept[0].managers, ['id', parseInt(curUserId)]));
+                        deferUserMng.resolve(_.some(dept.Managers.results, ['Id', parseInt(curUserId)]));                    
                     })
                     .catch(function (error) {
                         deferUserMng.reject(error);

@@ -43,6 +43,9 @@
 
         if ($routeParams.id) {
             promises.push(contractsSvc.getContractById($routeParams.id));
+            promises.push(contractSuppliersSvc.getAllItems($routeParams.id));
+            promises.push(contractDocumentsSvc.getAllItems($routeParams.id));
+            promises.push(contractRenewalsSvc.getAllItems($routeParams.id));
         }
 
         $q
@@ -65,6 +68,10 @@
                 ctrl.types = ["Contract", "Framework Agreement", "Property Lease"];
                 if ($routeParams.id) {
                     ctrl.contract = results[6];
+                    ctrl.contract.suppliers = results[7];
+                    ctrl.contract.documents = results[8];
+                    ctrl.contract.renewals = results[9];
+                    ctrl.contract.curusermanager = _.some(_.find(ctrl.departments, ['id', ctrl.contract.department.id]).managers, ['Id', _spPageContextInfo.userId]);
                 } else {
                     ctrl.contract.status = "Active";
                     ctrl.contract.type = "Contract";
@@ -334,23 +341,36 @@
                 return;
             }
 
-            $dialogConfirm('Add Contract?', 'Confirm Transaction')
-                .then(function () {
-                    ctrl.submitClicked = true;
-                    spinnerService.show('spinner1');
-                    contractsSvc
-                        .addContract(ctrl.contract)
-                        .then(function (res) {
-                            growl.success('Record added successfully!');
-                            $location.path("/dashboard");
-                        })
-                        .catch(function (error) {
-                            growl.error(error);
-                        })
-                        .finally(function () {
-                            ctrl.submitClicked = false;
-                            spinnerService.closeAll();
-                        });
+            contractsSvc
+                .checkIfContractExists(ctrl.contract.title, ctrl.contract.department.id, ctrl.contract.startdate, ctrl.contract.enddate)
+                .then(function (itemExists) {
+                    if (itemExists) {
+                        $dialogAlert("The contract specified already exists in the system.", "Contact IT Service desk for support");
+                        return;
+                    } else {
+                        $dialogConfirm('Add Contract?', 'Confirm Transaction')
+                            .then(function () {
+                                ctrl.submitClicked = true;
+                                spinnerService.show('spinner1');
+                                contractsSvc
+                                    .addContract(ctrl.contract)
+                                    .then(function (res) {
+                                        growl.success('Record added successfully!');
+                                        $location.path("/dashboard");
+                                    })
+                                    .catch(function (error) {
+                                        growl.error(error);
+                                    })
+                                    .finally(function () {
+                                        ctrl.submitClicked = false;
+                                        spinnerService.closeAll();
+                                    });
+                            });
+                    }
+                })
+                .catch(function (error) {
+                    addContractdefer.reject("An error occured while checking if contract exists. Contact IT Service desk for support.");
+                    console.log(error);
                 });
         };
 
@@ -379,7 +399,7 @@
                 .then(function () {
                     spinnerService.show('spinner1');
                     contractRenewalsSvc
-                        .AddItem(ctrl.renewal, ctrl.contract.id)
+                        .AddItem(ctrl.renewal, ctrl.contract)
                         .then(function (rens) {
                             ctrl.contract.renewals = rens;
                             growl.success('Contract extension added successfully!');
@@ -402,7 +422,7 @@
                 .then(function () {
                     spinnerService.show('spinner1');
                     contractRenewalsSvc
-                        .DeleteItem(ren.id, ctrl.contract.id)
+                        .DeleteItem(ren.id, ctrl.contract)
                         .then(function (rens) {
                             ctrl.contract.renewals = rens;
                             growl.success('Extension removed from the contract successfully!');
@@ -471,32 +491,45 @@
                 return;
             }
 
-            $dialogConfirm('Update contract main details?', 'Confirm Transaction')
-                .then(function () {
-                    spinnerService.show('spinner1');
+            contractsSvc
+                .checkIfContractExists(ctrl.contract.title, ctrl.contract.department.id, ctrl.contract.startdate, ctrl.contract.enddate)
+                .then(function (itemExists) {
+                    if (itemExists) {
+                        $dialogAlert("The contract specified details already exists in the system.", "Contact IT Service desk for support");
+                        return;
+                    } else {
+                        $dialogConfirm('Update contract main details?', 'Confirm Transaction')
+                            .then(function () {
+                                spinnerService.show('spinner1');
 
-                    contractsSvc
-                        .updateContract(ctrl.contract)
-                        .then(function (res) {
-                            contractsSvc
-                                .getContractById($routeParams.id)
-                                .then(function (response) {
-                                    ctrl.contract = response;
-                                    growl.success('Contract main details updated added successfully!');
-                                    $location.path("/dashboard");
-                                })
-                                .catch(function (error) {
-                                    growl.error(error);
-                                });
+                                contractsSvc
+                                    .updateContract(ctrl.contract)
+                                    .then(function (res) {
+                                        contractsSvc
+                                            .getContractById($routeParams.id)
+                                            .then(function (response) {
+                                                ctrl.contract = response;
+                                                growl.success('Contract main details updated added successfully!');
+                                                $location.path("/dashboard");
+                                            })
+                                            .catch(function (error) {
+                                                growl.error(error);
+                                            });
 
-                        })
-                        .catch(function (error) {
-                            growl.error(error);
-                        })
-                        .finally(function () {
-                            spinnerService.closeAll();
-                        });
-                });
+                                    })
+                                    .catch(function (error) {
+                                        growl.error(error);
+                                    })
+                                    .finally(function () {
+                                        spinnerService.closeAll();
+                                    });
+                            });
+                    }
+                })
+                .catch(function (error) {
+                    addContractdefer.reject("An error occured while checking if contract exists. Contact IT Service desk for support.");
+                    console.log(error);
+                });            
         };
 
         ctrl.removeContractManager = function (managerId) {

@@ -188,7 +188,8 @@
                             </span>
                         </td>
                         <td><span>{{contract.status}}</span></td>
-                        <td><span>{{contract.renewals.length > 0 ? (contract.renewals[0].enddate | date: 'dd/MM/yyyy' : 'europe/london') : "N/A"}}</span></td>
+                        <td><span>{{contract.showextensionenddate ? (contract.extensionenddate | date: 'dd/MM/yyyy' : 'europe/london') : "N/A"}}</span></td>
+                        <!--<td><span>{{contract.renewals.length > 0 ? (contract.renewals[0].enddate | date: 'dd/MM/yyyy' : 'europe/london') : "N/A"}}</span></td>-->
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-xs btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
